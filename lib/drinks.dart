@@ -1,16 +1,31 @@
-import 'package:app_02/Animation/FadeAnimation.dart';
+import 'package:app_02/Animation/fade_animation.dart';
 import 'package:flutter/material.dart';
 
-class Shoes extends StatefulWidget {
+class Drinks extends StatefulWidget {
   final String image;
 
-  const Shoes({Key? key, required this.image}) : super(key: key);
+  const Drinks({Key? key, required this.image}) : super(key: key);
 
   @override
-  _ShoesState createState() => _ShoesState();
+  _DrinksState createState() => _DrinksState();
 }
 
-class _ShoesState extends State<Shoes> {
+class _DrinksState extends State<Drinks> {
+  bool isFavorite = false;
+  bool isPurchased = false;
+
+  void addToFavorites() {
+    setState(() {
+      isFavorite = !isFavorite;
+    });
+  }
+
+  void purchase() {
+    setState(() {
+      isPurchased = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +42,7 @@ class _ShoesState extends State<Shoes> {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey[400]!,
+                    color: Colors.grey[400]!,
                   blurRadius: 10,
                   offset: const Offset(0, 10),
                 ),
@@ -45,24 +60,25 @@ class _ShoesState extends State<Shoes> {
                         onTap: () {
                           Navigator.pop(context);
                         },
-                        child: Container(
-                          child: const Icon(
-                            Icons.arrow_back_ios,
-                            color: Colors.white,
-                          ),
+                        child: const Icon(
+                          Icons.arrow_back_ios,
+                          color: Colors.white,
                         ),
                       ),
                       Container(
                         width: 35,
                         height: 35,
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.white,
+                          color: isFavorite ? Colors.red : Colors.white,
                         ),
-                        child: const Center(
-                          child: Icon(
-                            Icons.favorite_border,
-                            size: 20,
+                        child: Center(
+                          child: IconButton(
+                            onPressed: addToFavorites,
+                            icon: Icon(
+                              isFavorite ? Icons.favorite : Icons.favorite_border,
+                              color: isFavorite ? Colors.white : Colors.black,
+                            ),
                           ),
                         ),
                       ),
@@ -91,24 +107,24 @@ class _ShoesState extends State<Shoes> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
-                          FadeAnimation(
+                          const FadeAnimation(
                             1.3,
-                            const Text(
-                              "Sneakers",
+                            Text(
+                              "Bebidas",
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 50,
+                                fontSize: 30,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
                           const SizedBox(
-                            height: 25,
+                            height: 15,
                           ),
-                          FadeAnimation(
+                          const FadeAnimation(
                             1.4,
-                            const Text(
-                              "Size",
+                            Text(
+                              "Quantidade",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -128,7 +144,7 @@ class _ShoesState extends State<Shoes> {
                                   margin: const EdgeInsets.only(right: 20),
                                   child: const Center(
                                     child: Text(
-                                      '40',
+                                      '6',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
@@ -149,7 +165,7 @@ class _ShoesState extends State<Shoes> {
                                   ),
                                   child: const Center(
                                     child: Text(
-                                      '42',
+                                      '12',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -165,7 +181,7 @@ class _ShoesState extends State<Shoes> {
                                   margin: const EdgeInsets.only(right: 20),
                                   child: const Center(
                                     child: Text(
-                                      '44',
+                                      '24',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
@@ -174,15 +190,14 @@ class _ShoesState extends State<Shoes> {
                                   ),
                                 ),
                               ),
-                              FadeAnimation(
+                              const FadeAnimation(
                                 1.47,
-                                Container(
+                                SizedBox(
                                   width: 40,
                                   height: 40,
-                                  margin: const EdgeInsets.only(right: 20),
-                                  child: const Center(
+                                 child: Center(
                                     child: Text(
-                                      '46',
+                                      '48',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
@@ -198,17 +213,39 @@ class _ShoesState extends State<Shoes> {
                           ),
                           FadeAnimation(
                             1.5,
-                            Container(
-                              height: 50,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  'Buy Now',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
+                            GestureDetector(
+                              onTap: () {
+                                purchase();
+                                // Mostrar uma caixa de diálogo ou algum tipo de mensagem após a compra efetuada
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text('Compra efetuada com sucesso'),
+                                      actions: [
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text('Fechar'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              child: Container(
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    'Compre Agora',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                               ),

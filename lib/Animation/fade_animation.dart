@@ -4,7 +4,7 @@ class FadeAnimation extends StatefulWidget {
   final double delay;
   final Widget child;
 
-  FadeAnimation(this.delay, this.child);
+  const FadeAnimation(this.delay, this.child, {Key? key}) : super(key: key);
 
   @override
   _FadeAnimationState createState() => _FadeAnimationState();
@@ -20,8 +20,8 @@ class _FadeAnimationState extends State<FadeAnimation>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 500),
-      reverseDuration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
+      reverseDuration: const Duration(milliseconds: 500),
       value: 0,
     );
     _opacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(

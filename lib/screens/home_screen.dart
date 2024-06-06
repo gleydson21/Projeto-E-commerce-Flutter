@@ -1,9 +1,18 @@
-import 'package:app_02/Animation/FadeAnimation.dart';
+import 'package:app_02/Animation/fade_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:app_02/Shoes.dart';
+import 'package:app_02/drinks.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  bool isFavorited = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +21,7 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         leading: null,
         title: const Text(
-          "Shoes",
+          "Bora de Zero",
           style: TextStyle(color: Colors.black, fontSize: 25),
         ),
         actions: <Widget>[
@@ -38,7 +47,7 @@ class HomePage extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: <Widget>[
-              Container(
+              SizedBox(
                 height: 40,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
@@ -51,12 +60,12 @@ class HomePage extends StatelessWidget {
                           margin: const EdgeInsets.only(right: 10),
                           decoration: BoxDecoration(
                             color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(30),
                           ),
                           child: const Center(
                             child: Text(
-                              "All",
-                              style: TextStyle(fontSize: 20),
+                              "Todos",
+                              style: TextStyle(fontSize: 18),
                             ),
                           ),
                         ),
@@ -70,8 +79,8 @@ class HomePage extends StatelessWidget {
                           margin: const EdgeInsets.only(right: 10),
                           child: const Center(
                             child: Text(
-                              "Sneakers",
-                              style: TextStyle(fontSize: 17),
+                              "Cervejas",
+                              style: TextStyle(fontSize: 16),
                             ),
                           ),
                         ),
@@ -85,8 +94,8 @@ class HomePage extends StatelessWidget {
                           margin: const EdgeInsets.only(right: 10),
                           child: const Center(
                             child: Text(
-                              "Football",
-                              style: TextStyle(fontSize: 17),
+                              "Vinhos",
+                              style: TextStyle(fontSize: 16),
                             ),
                           ),
                         ),
@@ -97,26 +106,26 @@ class HomePage extends StatelessWidget {
                       child: FadeAnimation(
                         1.3,
                         Container(
-                          margin: const EdgeInsets.only(right: 10),
+                          margin: const EdgeInsets.only(right: 0),
                           child: const Center(
                             child: Text(
-                              "Soccer",
-                              style: TextStyle(fontSize: 17),
+                              "Espumante",
+                              style: TextStyle(fontSize: 15),
                             ),
                           ),
                         ),
                       ),
                     ),
                     AspectRatio(
-                      aspectRatio: 2.2 / 1,
+                      aspectRatio: 2.1 / 1,
                       child: FadeAnimation(
                         1.4,
                         Container(
                           margin: const EdgeInsets.only(right: 10),
                           child: const Center(
                             child: Text(
-                              "Golf",
-                              style: TextStyle(fontSize: 17),
+                              "Sucos",
+                              style: TextStyle(fontSize: 15),
                             ),
                           ),
                         ),
@@ -129,7 +138,7 @@ class HomePage extends StatelessWidget {
               FadeAnimation(
                 1.5,
                 makeItem(
-                  image: 'assets/images/one.jpg',
+                  image: 'assets/images/heiniken.jpg',
                   tag: 'red',
                   context: context,
                 ),
@@ -137,7 +146,7 @@ class HomePage extends StatelessWidget {
               FadeAnimation(
                 1.6,
                 makeItem(
-                  image: 'assets/images/two.jpg',
+                  image: 'assets/images/budwiser.jpg',
                   tag: 'blue',
                   context: context,
                 ),
@@ -145,7 +154,7 @@ class HomePage extends StatelessWidget {
               FadeAnimation(
                 1.7,
                 makeItem(
-                  image: 'assets/images/three.jpg',
+                  image: 'assets/images/corona.jpg',
                   tag: 'white',
                   context: context,
                 ),
@@ -165,7 +174,7 @@ class HomePage extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => Shoes(
+              builder: (context) => Drinks(
                 image: image,
               ),
             ),
@@ -197,14 +206,14 @@ class HomePage extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Expanded(
+                  const Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         FadeAnimation(
                           1,
-                          const Text(
-                            "Sneakers",
+                          Text(
+                            "Os mais pedidos",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 30,
@@ -212,11 +221,11 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 10),
+                        SizedBox(height: 10),
                         FadeAnimation(
                           1.1,
-                          const Text(
-                            "Nike",
+                          Text(
+                            "Cerveja",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
@@ -231,24 +240,25 @@ class HomePage extends StatelessWidget {
                     Container(
                       width: 35,
                       height: 35,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.white,
+                        color: isFavorited ? Colors.red : Colors.white,
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Icon(
-                          Icons.favorite_border,
+                          isFavorited ? Icons.favorite : Icons.favorite_border,
                           size: 20,
+                          color: isFavorited ? Colors.white : Colors.black,
                         ),
                       ),
                     ),
                   ),
                 ],
               ),
-              FadeAnimation(
+              const FadeAnimation(
                 1.2,
-                const Text(
-                  "100\$",
+                Text(
+                  "R\$100",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 30,
