@@ -1,0 +1,30 @@
+name: app_02
+description: "A new Flutter project."
+publish_to: 'none' # Remova esta linha se desejar publicar no pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.12.0 <3.0.0' # Atualizado para uma versão mais recente
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_svg: ^0.22.0
+  simple_animations: ^4.2.0
+  another_flutter_splash_screen: ^1.2.0 
+  cupertino_icons: ^1.0.6
+  http: ^1.2.1
+  dio: ^5.4.3+1
+  rxdart: ^0.27.7
+  flutter_splash_screen: ^3.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
