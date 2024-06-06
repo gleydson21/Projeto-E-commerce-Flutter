@@ -1,6 +1,6 @@
-// ignore_for_file: prefer_const_constructors
-import 'package:app_02/authentication/passwordrecovery_screen.dart';
+import 'package:app_02/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:app_02/authentication/passwordrecovery_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
@@ -11,56 +11,119 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+  
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Login'),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(
-                labelText: 'Email',
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.grey[300]!, Colors.grey[100]!],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height: 50),
+              Image.asset(
+                'assets/images/logo.png',
+                width: 120,
               ),
-            ),
-            SizedBox(height: 20),
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(
-                labelText: 'Password',
-              ),
-              obscureText: true,
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Lógica de validação do login aqui
-                String email = _emailController.text;
-                String password = _passwordController.text;
-                _login(email, password, context);
-              },
-              child: Text('Login'),
-            ),
-            SizedBox(height: 20),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PasswordRecoveryScreen(),
-                  ),
-                );
-              },
-              child: Text(
-                'Esqueceu a senha? Clique aqui',
+              const SizedBox(height: 20),
+              const Text(
+                'Bem-vindo(a) De Volta!',
                 style: TextStyle(
-                  decoration: TextDecoration.underline,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
-          ],
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                    labelText: 'Senha',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  obscureText: true,
+                ),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  // Lógica de validação do login aqui
+                  String email = _emailController.text;
+                  String password = _passwordController.text;
+                  _login(email, password, context);
+                },
+                child: const SizedBox(
+                  width: 200,
+                  height: 50,
+                  child: Center(
+                    child: Text(
+                      'Login',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PasswordRecoveryScreen(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  'Esqueceu a senha? Clique aqui',
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => RegistrationScreen()),
+                  );
+                },
+                child: const Text(
+                  'Novo Cadastro',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 65, 243, 33),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
         ),
       ),
     );
@@ -72,31 +135,30 @@ class LoginScreen extends StatelessWidget {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('Erro'),
-          content: Text('Preencha todos os campos'),
+          title: const Text('Erro'),
+          content: const Text('Preencha todos os campos'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         ),
       );
     } else {
-      // Lógica de autenticação com o servidor
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('Sucesso'),
-          content: Text('Login realizado com sucesso'),
+          title: const Text('Sucesso'),
+          content: const Text('Login realizado com sucesso'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         ),

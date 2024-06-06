@@ -1,14 +1,14 @@
-import 'package:app_02/screens/login_screen.dart';
+import 'package:app_02/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:app_02/screens/home_screen.dart'; // Importe a classe HomePage
-import 'package:app_02/screens/splash_screen.dart'; // Importe a classe SplashScreen
-// Importe outras telas, se necessário
+import 'package:app_02/screens/login_screen.dart';
+import 'package:app_02/screens/home_screen.dart';
+import 'package:app_02/screens/splash_screen.dart';
 
 class Routes {
   static const String splash = '/';
   static const String home = '/home';
   static const String login = '/login';
-  static const String tela1 = '/tela1';
+  static const String registration = '/Registration';
   static const String tela2 = '/tela2';
   static const String tela3 = '/tela3';
   static const String tela4 = '/tela4';
@@ -22,10 +22,11 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case login:
         return MaterialPageRoute(builder: (_) => LoginScreen());
-      // case tela1:
-      //   return MaterialPageRoute(builder: (_) => Tela1());
+      case registration:
+        return MaterialPageRoute(builder: (_) => RegistrationScreen());
+      // Casos para as outras telas
       // case tela2:
-      //   return MaterialPageRoute(builder: (_) => Tela2());
+      //   return MaterialPageRoute(builder: (_) => RegistrationScreen());
       // case tela3:
       //   return MaterialPageRoute(builder: (_) => Tela3());
       // case tela4:
@@ -33,7 +34,6 @@ class Routes {
       // case tela5:
       //   return MaterialPageRoute(builder: (_) => Tela5());
       default:
-        // Se a rota não for encontrada, exiba uma tela de erro
         return MaterialPageRoute(
           builder: (_) => Scaffold(
             appBar: AppBar(
@@ -46,4 +46,11 @@ class Routes {
         );
     }
   }
+}
+void main() {
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    initialRoute: Routes.splash,
+    onGenerateRoute: Routes.generateRoute,
+  ));
 }
